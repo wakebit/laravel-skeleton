@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Console;
+namespace App\Infrastructure;
 
 use Illuminate\Console\Scheduling\Schedule;
-use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Foundation\Console\Kernel as BaseKernel;
 
-final class Kernel extends ConsoleKernel
+final class ConsoleKernel extends BaseKernel
 {
     /** {@inheritDoc} */
     protected function schedule(Schedule $schedule): void
@@ -18,6 +18,6 @@ final class Kernel extends ConsoleKernel
     /** {@inheritDoc} */
     protected function commands(): void
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/../../Application/Console/Commands');
     }
 }
