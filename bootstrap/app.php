@@ -30,7 +30,7 @@ $app->useAppPath(dirname(__DIR__) . DIRECTORY_SEPARATOR . 'src');
 
 $app->singleton(
     Illuminate\Contracts\Http\Kernel::class,
-    App\Http\Kernel::class
+    \App\Infrastructure\Http\Kernel::class
 );
 
 $app->singleton(
