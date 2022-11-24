@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Exceptions;
+namespace App\Infrastructure;
 
-use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Foundation\Exceptions\Handler as BaseHandler;
 
-final class Handler extends ExceptionHandler
+final class ExceptionHandler extends BaseHandler
 {
     /** {@inheritDoc} */
     protected $levels = [
