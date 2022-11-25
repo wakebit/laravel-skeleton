@@ -7,7 +7,9 @@ namespace App\Infrastructure\Http\Middleware;
 use Closure;
 use Illuminate\Contracts\Auth\Factory as AuthFactory;
 use Illuminate\Contracts\Routing\ResponseFactory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 final class RedirectIfAuthenticated
 {
@@ -20,11 +22,11 @@ final class RedirectIfAuthenticated
     /**
      * Handle an incoming request.
      *
-     * @param  Closure(Request): (\Illuminate\Http\Response|\Illuminate\Http\RedirectResponse)  $next
+     * @param  Closure(Request): (Response|RedirectResponse)  $next
      * @param  string|null  ...$guards
      * @noinspection PhpDocSignatureIsNotCompleteInspection
      */
-    public function handle(Request $request, Closure $next, ...$guards): \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse
+    public function handle(Request $request, Closure $next, ...$guards): Response|RedirectResponse
     {
         $guards = empty($guards) ? [null] : $guards;
 
