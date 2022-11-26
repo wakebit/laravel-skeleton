@@ -6,6 +6,9 @@ namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
+/**
+ * @psalm-suppress PropertyNotSetInConstructor
+ */
 final class User extends Authenticatable
 {
     /** {@inheritDoc} */
