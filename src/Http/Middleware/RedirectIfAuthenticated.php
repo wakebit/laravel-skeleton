@@ -5,11 +5,18 @@ declare(strict_types=1);
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Contracts\Auth\Factory as AuthFactory;
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 final class RedirectIfAuthenticated
 {
+    public function __construct(
+        private readonly AuthFactory $authFactory,
+        private readonly ResponseFactory $responseFactory,
+    ) {
+    }
+
     /**
      * Handle an incoming request.
      *
@@ -22,8 +29,8 @@ final class RedirectIfAuthenticated
         $guards = empty($guards) ? [null] : $guards;
 
         foreach ($guards as $guard) {
-            if (Auth::guard($guard)->check()) {
-                return redirect('/home');
+            if ($this->authFactory->guard($guard)->check()) {
+                return $this->responseFactory->redirectTo('/home');
             }
         }
 
