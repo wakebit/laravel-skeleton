@@ -12,6 +12,7 @@ final class Kernel extends HttpKernel
      * {@inheritDoc}
      *
      * @var array<int, class-string|string>
+     * @psalm-suppress NonInvariantDocblockPropertyType
      */
     protected $middleware = [
         \Illuminate\Http\Middleware\TrustProxies::class,
@@ -26,6 +27,7 @@ final class Kernel extends HttpKernel
      * {@inheritDoc}
      *
      * @var array<string, array<int, class-string|string>>
+     * @psalm-suppress NonInvariantDocblockPropertyType
      */
     protected $middlewareGroups = [
         'web' => [
@@ -48,6 +50,7 @@ final class Kernel extends HttpKernel
      * {@inheritDoc}
      *
      * @var array<string, class-string|string>
+     * @psalm-suppress NonInvariantDocblockPropertyType
      */
     protected $routeMiddleware = [
         'auth'             => \App\Infrastructure\Http\Middleware\Authenticate::class,

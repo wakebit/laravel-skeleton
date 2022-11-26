@@ -12,6 +12,7 @@ final class EventServiceProvider extends ServiceProvider
      * {@inheritdoc}
      *
      * @var array<class-string, array<int, class-string>>
+     * @psalm-suppress NonInvariantDocblockPropertyType
      */
     protected $listen = [
         //
