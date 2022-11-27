@@ -1,0 +1,32 @@
+name: Coding Standards
+
+on:
+  push:
+    paths:
+      - '**.php'
+      - '.phpcs.xml.dist'
+  pull_request:
+    paths:
+      - '**.php'
+      - '.phpcs.xml.dist'
+
+jobs:
+  phpcs:
+    name: PHP_CodeSniffer
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.1
+          coverage: none
+          tools: cs2pr
+
+      - name: Install composer dependencies
+        uses: ramsey/composer-install@v2
+
+      - name: Run PHP_CodeSniffer
+        run: ./vendor/bin/phpcs -q --no-colors --report=checkstyle | cs2pr
