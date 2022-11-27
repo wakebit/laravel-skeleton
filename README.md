@@ -18,6 +18,7 @@ This skeleton includes:
 - Reduced dependency count (I don't need Sanctum, Pint, etc. I'll install them when they will required).
 - Added static analysis tool - Psalm with max strict level as possible (1). My code should be clean and strong as possible.
 - Added code style checker and beautifier.
+- Added Github Actions for checking code style, running static analysis and tests.
 - Project code located in `src` folder and base files have different from default namespaces.
 - Useless comments were removed.
 - Useless doc-blocks were removed and replaced with type hints when it's possible.
@@ -32,6 +33,3 @@ This skeleton includes:
 - Event service provider was cleaned: removed registration emailing.
 - User model was cleaned: removed useless doc-blocks, traits, notifications.
 - Created environment variables for application timezone, locale.
-
-## TODO:
-- Github actions (code style checker, static analysis checker, tests runner).
