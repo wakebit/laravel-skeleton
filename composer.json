@@ -35,7 +35,7 @@
     "scripts": {
         "cs-check": "phpcs",
         "cs-fix": "phpcbf",
-
+        "psalm": "psalm",
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"
