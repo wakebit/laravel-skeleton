@@ -1,5 +1,16 @@
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
+<p align="center">
+<a href="https://github.com/wakebit/laravel-skeleton/actions"><img src="https://github.com/wakebit/laravel-skeleton/actions/workflows/static-analysis.yml/badge.svg" alt="Static Analysis"></a>
+<a href="https://github.com/wakebit/laravel-skeleton/actions"><img src="https://github.com/wakebit/laravel-skeleton/actions/workflows/coding-standards.yml/badge.svg" alt="Coding Standards"></a>
+<a href="https://github.com/wakebit/laravel-skeleton/actions"><img src="https://github.com/wakebit/laravel-skeleton/actions/workflows/tests.yml/badge.svg" alt="Tests"></a>
+</p>
+
+<p align="center">
+<a href="https://github.com/wakebit/laravel-skeleton/actions"><img src="https://shepherd.dev/github/wakebit/laravel-skeleton/coverage.svg" alt="Type Coverage"></a>
+<a href="https://github.com/wakebit/laravel-skeleton/actions"><img src="https://shepherd.dev/github/wakebit/laravel-skeleton/level.svg" alt="Psalm Level"></a>
+</p>
+
 ## Laravel skeleton project
 This skeleton includes:
 - All classes marked as `final`.
