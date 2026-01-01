@@ -8,12 +8,7 @@ use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 final class Kernel extends HttpKernel
 {
-    /**
-     * {@inheritDoc}
-     *
-     * @var array<int, class-string|string>
-     * @psalm-suppress NonInvariantDocblockPropertyType
-     */
+    /** {@inheritDoc} */
     protected $middleware = [
         \Illuminate\Http\Middleware\TrustProxies::class,
         \Illuminate\Http\Middleware\HandleCors::class,
@@ -23,12 +18,7 @@ final class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
     ];
 
-    /**
-     * {@inheritDoc}
-     *
-     * @var array<string, array<int, class-string|string>>
-     * @psalm-suppress NonInvariantDocblockPropertyType
-     */
+    /** {@inheritDoc} */
     protected $middlewareGroups = [
         'web' => [
             \Illuminate\Cookie\Middleware\EncryptCookies::class,
@@ -41,18 +31,13 @@ final class Kernel extends HttpKernel
 
         'api' => [
             // \Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class,
-            'throttle:api',
+            \Illuminate\Routing\Middleware\ThrottleRequests::class . ':api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
     ];
 
-    /**
-     * {@inheritDoc}
-     *
-     * @var array<string, class-string|string>
-     * @psalm-suppress NonInvariantDocblockPropertyType
-     */
-    protected $routeMiddleware = [
+    /** {@inheritDoc} */
+    protected $middlewareAliases = [
         'auth'             => \App\Infrastructure\Http\Middleware\Authenticate::class,
         'auth.basic'       => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'auth.session'     => \Illuminate\Session\Middleware\AuthenticateSession::class,
@@ -60,6 +45,7 @@ final class Kernel extends HttpKernel
         'can'              => \Illuminate\Auth\Middleware\Authorize::class,
         'guest'            => \App\Infrastructure\Http\Middleware\RedirectIfAuthenticated::class,
         'password.confirm' => \Illuminate\Auth\Middleware\RequirePassword::class,
+        'precognitive'     => \Illuminate\Foundation\Http\Middleware\HandlePrecognitiveRequests::class,
         'signed'           => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle'         => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified'         => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
