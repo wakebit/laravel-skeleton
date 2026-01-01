@@ -20,12 +20,10 @@ final class AppServiceProvider extends ServiceProvider
     {
         $this->app->extend(
             'migration.creator',
-            static function (MigrationCreator $creator, Application $app): MigrationCreator {
-                return new MigrationCreator(
-                    $app->get(\Illuminate\Filesystem\Filesystem::class),
-                    $app->resourcePath('stubs'),
-                );
-            },
+            static fn (MigrationCreator $creator, Application $app): MigrationCreator => new MigrationCreator(
+                $app->get(\Illuminate\Filesystem\Filesystem::class),
+                $app->resourcePath('stubs'),
+            ),
         );
     }
 

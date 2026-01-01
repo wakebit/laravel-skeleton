@@ -10,11 +10,11 @@ use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-final class RedirectIfAuthenticated
+final readonly class RedirectIfAuthenticated
 {
     public function __construct(
-        private readonly AuthFactory $authFactory,
-        private readonly ResponseFactory $responseFactory,
+        private AuthFactory $authFactory,
+        private ResponseFactory $responseFactory,
     ) {
     }
 
@@ -25,7 +25,7 @@ final class RedirectIfAuthenticated
      */
     public function handle(Request $request, Closure $next, string ...$guards): Response
     {
-        $guards = empty($guards) ? [null] : $guards;
+        $guards = $guards === [] ? [null] : $guards;
 
         foreach ($guards as $guard) {
             if ($this->authFactory->guard($guard)->check()) {
