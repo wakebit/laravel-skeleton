@@ -1,0 +1,10 @@
+services:
+  laravel-skeleton:
+    container_name: laravel-skeleton
+    build:
+      dockerfile: Dockerfile
+    image: laravel-skeleton
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: sleep infinity
