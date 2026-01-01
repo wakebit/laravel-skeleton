@@ -24,11 +24,4 @@ final class EventServiceProvider extends ServiceProvider
     {
         //
     }
-
-    /** {@inheritDoc} */
-    #[\Override]
-    public function shouldDiscoverEvents(): bool
-    {
-        return false;
-    }
 }

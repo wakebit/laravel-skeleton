@@ -7,6 +7,7 @@ namespace App\Infrastructure\Http\Middleware;
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
 use Illuminate\Contracts\Auth\Factory as AuthFactory;
 use Illuminate\Contracts\Routing\UrlGenerator;
+use Illuminate\Http\Request;
 
 final class Authenticate extends Middleware
 {
@@ -23,12 +24,8 @@ final class Authenticate extends Middleware
      * @throws \InvalidArgumentException
      */
     #[\Override]
-    protected function redirectTo($request): ?string
+    protected function redirectTo(Request $request): ?string
     {
-        if (!$request->expectsJson()) {
-            return $this->urlGenerator->route('login');
-        }
-
-        return null;
+        return $request->expectsJson() ? null : $this->urlGenerator->route('login');
     }
 }

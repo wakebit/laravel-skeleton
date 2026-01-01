@@ -27,5 +27,6 @@ final class User extends Authenticatable
     /** {@inheritDoc} */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'password'          => 'hashed',
     ];
 }

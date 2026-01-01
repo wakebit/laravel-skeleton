@@ -11,7 +11,6 @@
         <file name="public/index.php"/>
 
         <directory name="database"/>
-        <directory name="lang"/>
         <directory name="src"/>
         <directory name="tests"/>
 

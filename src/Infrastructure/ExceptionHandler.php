@@ -9,23 +9,6 @@ use Illuminate\Foundation\Exceptions\Handler as BaseHandler;
 final class ExceptionHandler extends BaseHandler
 {
     /** {@inheritDoc} */
-    protected $levels = [
-        //
-    ];
-
-    /** {@inheritDoc} */
-    protected $dontReport = [
-        //
-    ];
-
-    /** {@inheritDoc} */
-    protected $dontFlash = [
-        'current_password',
-        'password',
-        'password_confirmation',
-    ];
-
-    /** {@inheritDoc} */
     #[\Override]
     public function register(): void
     {
