@@ -22,6 +22,7 @@ final class Authenticate extends Middleware
      *
      * @throws \InvalidArgumentException
      */
+    #[\Override]
     protected function redirectTo($request): ?string
     {
         if (!$request->expectsJson()) {

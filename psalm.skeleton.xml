@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<psalm
+    errorLevel="1"
+    checkForThrowsDocblock="true"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="https://getpsalm.org/schema/config"
+    xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
+>
+    <projectFiles>
+        <file name="bootstrap/app.php"/>
+        <file name="public/index.php"/>
+
+        <directory name="database"/>
+        <directory name="lang"/>
+        <directory name="src"/>
+        <directory name="tests"/>
+
+        <ignoreFiles>
+            <directory name="vendor"/>
+        </ignoreFiles>
+    </projectFiles>
+
+    <plugins>
+        <pluginClass class="Psalm\PhpUnitPlugin\Plugin"/>
+    </plugins>
+
+    <issueHandlers>
+        <UnusedClass>
+            <errorLevel type="suppress">
+                <referencedClass name="App\Infrastructure\Providers\AppServiceProvider" />
+                <referencedClass name="App\Infrastructure\Providers\EventServiceProvider" />
+                <referencedClass name="App\Models\User" />
+                <referencedClass name="Database\Seeders\DatabaseSeeder" />
+            </errorLevel>
+        </UnusedClass>
+
+        <PossiblyUnusedMethod>
+            <errorLevel type="suppress">
+                <referencedMethod name="App\Infrastructure\Http\Middleware\Authenticate::__construct" />
+                <referencedMethod name="App\Infrastructure\Http\Middleware\RedirectIfAuthenticated::__construct" />
+                <referencedMethod name="App\Infrastructure\Http\Middleware\RedirectIfAuthenticated::handle" />
+            </errorLevel>
+        </PossiblyUnusedMethod>
+    </issueHandlers>
+</psalm>

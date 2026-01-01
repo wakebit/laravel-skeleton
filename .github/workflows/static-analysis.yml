@@ -5,14 +5,14 @@ on:
     paths:
       - '.github/workflows/static-analysis.yml'
       - 'composer.*'
-      - 'psalm.xml'
+      - 'psalm.skeleton.xml'
       - 'src/**'
       - 'tests/**'
   pull_request:
     paths:
       - '.github/workflows/static-analysis.yml'
       - 'composer.*'
-      - 'psalm.xml'
+      - 'psalm.skeleton.xml'
       - 'src/**'
       - 'tests/**'
 
@@ -35,4 +35,4 @@ jobs:
         uses: ramsey/composer-install@v2
 
       - name: Run Psalm
-        run: ./vendor/bin/psalm --no-progress --shepherd --show-info=false --stats --no-cache --output-format=github
+        run: ./vendor/bin/psalm --config=psalm.skeleton.xml --no-progress --shepherd --show-info=false --stats --no-cache --output-format=github

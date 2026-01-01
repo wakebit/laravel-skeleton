@@ -11,3 +11,4 @@ CHANGELOG.md export-ignore
 .styleci.yml export-ignore
 Dockerfile export-ignore
 docker-compose.yml export-ignore
+psalm.skeleton.xml export-ignore

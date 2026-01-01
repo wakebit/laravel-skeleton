@@ -9,6 +9,7 @@ use Illuminate\Support\ServiceProvider;
 final class AppServiceProvider extends ServiceProvider
 {
     /** {@inheritDoc} */
+    #[\Override]
     public function register(): void
     {
         //

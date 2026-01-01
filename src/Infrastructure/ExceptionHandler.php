@@ -26,6 +26,7 @@ final class ExceptionHandler extends BaseHandler
     ];
 
     /** {@inheritDoc} */
+    #[\Override]
     public function register(): void
     {
         //
