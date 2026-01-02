@@ -15,7 +15,7 @@
 This skeleton includes:
 - All classes marked as `final`.
 - All PHP files marked with `declare(strict_types=1);`.
-- Reduced dependency count (I don't need Sanctum, Pint, etc. I'll install them when they will required).
+- Reduced dependency count (I don't need Sanctum, Pint, Sail, etc. I'll install them when they will required).
 - Added static analysis tool - Psalm with max strict level as possible (1). My code should be clean and strong as possible.
 - Added code style checker and beautifier.
 - Added Github Actions for checking code style, running static analysis and tests.
