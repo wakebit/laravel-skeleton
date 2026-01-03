@@ -15,7 +15,7 @@
 This skeleton includes:
 - All classes marked as `final`.
 - All PHP files marked with `declare(strict_types=1);`.
-- Reduced dependency count (I don't need Sanctum, Pint, etc. I'll install them when they will required).
+- Reduced dependency count (I don't need Sanctum, Pint, Sail, etc. I'll install them when they will required).
 - Added static analysis tool - Psalm with max strict level as possible (1). My code should be clean and strong as possible.
 - Added code style checker and beautifier.
 - Added Github Actions for checking code style, running static analysis and tests.
@@ -32,4 +32,6 @@ This skeleton includes:
 - Extended HTTP middlewares without any changes were replaced with vendors.
 - Event service provider was cleaned: removed registration emailing.
 - User model was cleaned: removed useless doc-blocks, traits, notifications.
-- Created environment variables for application timezone, locale.
+- Created environment variable for application timezone.
+- Application boostrap is classic: own HTTP Kernel, Console Kernel and Exception Handler. New App Builder (Laravel 11+) is cool but can be chaotic and monstrous for big apps.
+- Enabled throwing and reporting exceptions for all filesystems by default.
