@@ -1,0 +1,143 @@
+name: CI Pipeline
+
+on:
+  push:
+    paths:
+      - '**.php'
+      - 'psalm.xml'
+      - '.phpcs.xml.dist'
+
+  pull_request:
+    paths:
+      - '**.php'
+      - 'psalm.xml'
+      - '.phpcs.xml.dist'
+
+env:
+  PHP_VERSION: 8.5
+
+jobs:
+  static-analysis:
+    name: Static Analysis
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ env.PHP_VERSION }}
+          coverage: none
+          tools: cs2pr
+
+      - name: Get composer cache directory
+        id: composer-cache
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+      - name: Cache composer dependencies
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-interaction --no-progress --ansi
+
+      - name: Restore Psalm cache
+        uses: actions/cache@v4
+        with:
+          path: .psalm
+          key: "psalm-result-cache-${{ github.run_id }}"
+          restore-keys: |
+            psalm-result-cache-
+
+      - name: Run Psalm
+        run: ./vendor/bin/psalm --config=psalm.skeleton.xml --no-progress --show-info=false --output-format=checkstyle | cs2pr --graceful-warnings --notices-as-warnings --colorize
+
+  code-style:
+    name: Code Style Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ env.PHP_VERSION }}
+          coverage: none
+          tools: cs2pr
+
+      - name: Get composer cache directory
+        id: composer-cache
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+      - name: Cache composer dependencies
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-interaction --no-progress --ansi
+
+      - name: Restore PHP CodeSniffer cache
+        uses: actions/cache@v4
+        with:
+          path: .phpcs.cache
+          key: "phpcs-result-cache-${{ github.run_id }}"
+          restore-keys: |
+            phpcs-result-cache-
+
+      - name: Run PHP CodeSniffer
+        id: phpcs
+        run: ./vendor/bin/phpcs -s --colors --report-full --report-checkstyle=./phpcs-report.xml
+
+      - name: Show PHPCS results in PR
+        if: ${{ always() && steps.phpcs.outcome == 'failure' }}
+        run: cs2pr ./phpcs-report.xml --graceful-warnings --notices-as-warnings --colorize
+
+  tests:
+    name: Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ env.PHP_VERSION }}
+          coverage: none
+          tools: cs2pr
+
+      - name: Get composer cache directory
+        id: composer-cache
+        run: echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
+
+      - name: Cache composer dependencies
+        uses: actions/cache@v4
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: ${{ runner.os }}-composer-
+
+      - name: Setup problem matchers for PHPUnit
+        run: echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-interaction --no-progress --ansi
+
+      - name: Restore PHPUnit cache
+        uses: actions/cache@v4
+        with:
+          path: .phpunit.result.cache
+          key: "phpunit-result-cache-${{ github.run_id }}"
+          restore-keys: |
+            phpunit-result-cache-
+
+      - name: Run PHPUnit
+        run: ./vendor/bin/phpunit tests/
