@@ -7,7 +7,6 @@ use Rector\Config\Level\CodingStyleLevel;
 use Rector\Config\Level\DeadCodeLevel;
 use Rector\Config\Level\TypeDeclarationLevel;
 use Rector\Config\RectorConfig;
-use Rector\Php81\Rector\Array_\FirstClassCallableRector;
 use Rector\PHPUnit\PHPUnit100\Rector\Class_\StaticDataProviderClassMethodRector;
 use RectorLaravel\Set\LaravelLevelSetList;
 
@@ -31,7 +30,7 @@ return RectorConfig::configure()
     ->withCodeQualityLevel(count(CodeQualityLevel::RULES))
     ->withCodingStyleLevel(count(CodingStyleLevel::RULES))
     ->withSets([
-        LaravelLevelSetList::UP_TO_LARAVEL_100,
+        LaravelLevelSetList::UP_TO_LARAVEL_110,
     ])
     ->withAttributesSets(phpunit: true)
     ->withRules([
