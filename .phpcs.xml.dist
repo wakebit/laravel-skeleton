@@ -13,48 +13,13 @@
     <arg name="colors" />
     <arg name="extensions" value="php" />
 
-    <rule ref="LaminasCodingStandard">
-        <exclude name="Generic.Formatting.MultipleStatementAlignment"/>
-        <exclude name="SlevomatCodingStandard.Commenting.EmptyComment"/>
-        <exclude name="SlevomatCodingStandard.Namespaces.ReferenceUsedNamesOnly"/>
-        <exclude name="SlevomatCodingStandard.TypeHints.NullableTypeForNullDefaultValue"/>
-        <exclude name="WebimpressCodingStandard.Arrays.DoubleArrow"/>
-        <exclude name="WebimpressCodingStandard.Arrays.Format"/>
-        <exclude name="WebimpressCodingStandard.NamingConventions.AbstractClass"/>
-        <exclude name="WebimpressCodingStandard.NamingConventions.Trait"/>
-    </rule>
-
-    <rule ref="Generic.Formatting.SpaceAfterNot">
-        <properties>
-            <property name="spacing" value="0"/>
-        </properties>
-    </rule>
-
     <rule ref="PSR1.Files.SideEffects.FoundWithSymbols">
         <exclude-pattern>public/index.php</exclude-pattern>
     </rule>
 
-    <rule ref="SlevomatCodingStandard.ControlStructures.DisallowYodaComparison"/>
-    <rule ref="SlevomatCodingStandard.ControlStructures.EarlyExit"/>
-    <rule ref="SlevomatCodingStandard.ControlStructures.JumpStatementsSpacing">
-        <properties>
-            <property name="linesCountBeforeWhenFirstInCaseOrDefault" value="0"/>
-            <property name="linesCountAfterWhenLastInCaseOrDefault" value="1"/>
-            <property name="linesCountAfterWhenLastInLastCaseOrDefault" value="0"/>
-            <property name="jumpStatements" type="array">
-                <element value="return" />
-                <element value="throw" />
-                <element value="yield" />
-                <element value="yield_from" />
-            </property>
-        </properties>
-    </rule>
-    <rule ref="SlevomatCodingStandard.Functions.ArrowFunctionDeclaration"/>
+    <rule ref="WakebitCodingStandard" />
 
-    <rule ref="Squiz.Arrays.ArrayBracketSpacing" />
-    <rule ref="Squiz.Arrays.ArrayDeclaration.CommaAfterLast" />
-    <rule ref="Squiz.Arrays.ArrayDeclaration.DoubleArrowNotAligned" />
-    <rule ref="Squiz.Arrays.ArrayDeclaration.NoComma" />
-    <rule ref="Squiz.Arrays.ArrayDeclaration.SpaceAfterComma" />
-    <rule ref="Squiz.Commenting.InlineComment.NoSpaceBefore"/>
+    <rule ref="WebimpressCodingStandard.NamingConventions.AbstractClass.Prefix">
+        <exclude-pattern>tests/TestCase.php</exclude-pattern>
+    </rule>
 </ruleset>
