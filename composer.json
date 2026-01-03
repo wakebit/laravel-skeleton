@@ -8,17 +8,16 @@
     "require": {
         "php": "^8.3",
         "ext-pdo": "*",
-        "driftingly/rector-laravel": "^2.1",
-        "guzzlehttp/guzzle": "^7.2",
-        "laravel/framework": "^11.0",
-        "laravel/tinker": "^2.8"
+        "laravel/framework": "^12.0",
+        "laravel/tinker": "^2.10.1"
     },
     "require-dev": {
-        "fakerphp/faker": "^1.9.1",
+        "driftingly/rector-laravel": "^2.1",
+        "fakerphp/faker": "^1.23",
         "laminas/laminas-coding-standard": "^3.0",
-        "laravel/pail": "^1.2",
-        "nunomaduro/collision": "^8.1",
-        "phpunit/phpunit": "^10.0",
+        "laravel/pail": "^1.2.2",
+        "nunomaduro/collision": "^8.6",
+        "phpunit/phpunit": "^11.5.3",
         "psalm/plugin-phpunit": "^0.19.5",
         "rector/rector": "^2.3",
         "spatie/laravel-ignition": "^2.0",
@@ -41,6 +40,22 @@
         "cs-fix": "phpcbf",
         "psalm": "psalm --config=psalm.skeleton.xml",
         "tests": "phpunit tests/",
+        "setup": [
+            "composer install",
+            "@php -r \"file_exists('.env') || copy('.env.example', '.env');\"",
+            "@php artisan key:generate",
+            "@php artisan migrate --force",
+            "npm install",
+            "npm run build"
+        ],
+        "dev": [
+            "Composer\\Config::disableProcessTimeout",
+            "npx concurrently -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1\" \"php artisan pail --timeout=0\" \"npm run dev\" --names=server,queue,logs,vite --kill-others"
+        ],
+        "test": [
+            "@php artisan config:clear --ansi",
+            "@php artisan test"
+        ],
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
             "@php artisan package:discover --ansi"
@@ -56,9 +71,8 @@
             "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
             "@php artisan migrate --graceful --ansi"
         ],
-        "dev": [
-            "Composer\\Config::disableProcessTimeout",
-            "npx concurrently -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1\" \"php artisan pail --timeout=0\" \"npm run dev\" --names=server,queue,logs,vite"
+        "pre-package-uninstall": [
+            "Illuminate\\Foundation\\ComposerScripts::prePackageUninstall"
         ]
     },
     "extra": {
